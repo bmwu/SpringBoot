@@ -1,2 +1,48 @@
 <!DOCTYPE html>
-$hello
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>$hello</h1>
+<div id="container-get" style="border:1px solid red; width:300px; height:100px;">
+    loading...
+</div>
+
+<div id="container-post" style="border:1px solid green; width:300px; height:100px;">
+    loading...
+</div>
+<table class="table table-striped">
+    <thead>
+    <th>ID</th>
+    <th>用户名</th>
+    <th>密码</th>
+    </thead>
+    <tbody>
+    #foreach($user in $userList)
+    <tr>
+        <td>$user.id</td>
+        <td>$user.username</td>
+        <td>$user.password</td>
+    </tr>
+    #end
+    </tbody>
+</table>
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){
+        $.get('/testGet', function(data){
+            $("#container-get").html(data);
+        });
+
+        var username = "lightsword";
+        $.post('/testPost', {username:username}, function(data){
+            $("#container-post").html(data);
+        });
+    });
+</script>
